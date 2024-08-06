@@ -1,20 +1,18 @@
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import SharedLayout from 'components/SharedLayout/SharedLayout';
-import FirstPage from 'pages/FirstPage/FirstPage';
-import { AppWrapper } from './App.styled';
+import {AppLayout} from "./components/AppLayout.jsx";
 
-const test = import.meta.env.VITE_API_TEST;
+const HomePage = lazy(() => import('./pages/HomePage.jsx'));
 
 function App() {
-  console.log(test);
+
   return (
-    <AppWrapper>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route path="/first" element={<FirstPage />} />
-        </Route>
-      </Routes>
-    </AppWrapper>
+    <Routes>
+      <Route path="/" element={<AppLayout/>}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<HomePage />} />
+      </Route>
+    </Routes>
   );
 }
 export default App;
